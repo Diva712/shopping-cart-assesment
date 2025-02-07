@@ -8,7 +8,7 @@ class ShoppingCart {
 
 
   async addItem(productName, quantity) {
-    console.log(productName);
+    //console.log(productName);
     const price = await fetchProductPrice(productName);
     if (price == null) {
       // console.log(`Product ${productName} is not found !!`)
