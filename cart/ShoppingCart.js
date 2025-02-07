@@ -11,8 +11,9 @@ class ShoppingCart {
     console.log(productName);
     const price = await fetchProductPrice(productName);
     if (price == null) {
-      console.log(`Product ${productName} is not found !!`)
-      return;
+      // console.log(`Product ${productName} is not found !!`)
+      // return;
+      throw new Error(`Product ${productName} is not found`);
     };
 
 
@@ -23,7 +24,8 @@ class ShoppingCart {
     else {
       this.items[productName] = { quantity, price };
     }
-    console.log(`${quantity} ${productName} added to the cart`);
+    // console.log(`${quantity} ${productName} added to the cart`);
+    return { message: `${quantity} x ${productName} added to the cart` };
   }
 
   //calculateSubtotal 
@@ -46,17 +48,25 @@ class ShoppingCart {
   }
 
 
-  displayCart() {
-    console.log("Cart Summary: ");
-    Object.entries(this.items).forEach(([product, details]) => {
-      console.log(`${details.quantity} x ${product} @ ${details.price} each`);
-    })
+  // displayCart() {
+  //   console.log("Cart Summary: ");
+  //   Object.entries(this.items).forEach(([product, details]) => {
+  //     console.log(`${details.quantity} x ${product} @ ${details.price} each`);
+  //   })
 
-    console.log(`Subtotal: $${this.calculateSubtotal().toFixed(2)}`);
-    console.log(`Tax(12.5%): $${this.calculateTax().toFixed(2)}`);
-    console.log(`Total: $${this.calculateTotal().toFixed(2)}`);
+  //   console.log(`Subtotal: $${this.calculateSubtotal().toFixed(2)}`);
+  //   console.log(`Tax(12.5%): $${this.calculateTax().toFixed(2)}`);
+  //   console.log(`Total: $${this.calculateTotal().toFixed(2)}`);
+  // }
+
+  getCartSummary() {
+    return {
+      items: this.items,
+      subtotal: this.calculateSubtotal().toFixed(2),
+      tax: this.calculateTax().toFixed(2),
+      total: this.calculateTotal().toFixed(2)
+    };
   }
-
 }
 
 module.exports = ShoppingCart;
