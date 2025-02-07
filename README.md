@@ -6,7 +6,7 @@
 To run this Node.js application, first clone the repository using the following command:
 
 ```sh
-git clone https://github.com/Diva712/shopping-cart-assignment.git
+git clone https://github.com/Diva712/shopping-cart-assesment.git
 ```
 
 or manually copy the code from GitHub.
