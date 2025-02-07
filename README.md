@@ -11,6 +11,14 @@ git clone https://github.com/Diva712/shopping-cart-assesment.git
 
 or manually copy the code from GitHub.
 
+## Internal Dependencies
+
+This application fetches product prices using a **Price API**, available at:
+
+```sh
+http://localhost:3001/products/
+```
+
 ### Install Dependencies
 Navigate to the project directory and install necessary packages:
 
@@ -100,14 +108,6 @@ DELETE http://localhost:3000/api/cart/clear
 {
     "message": "Cart has been cleared !!"
 }
-```
-
-## Internal Dependencies
-
-This application fetches product prices using a **Price API**, available at:
-
-```sh
-http://localhost:3001/products/
 ```
 
 ## Singleton Pattern and Its Issues
