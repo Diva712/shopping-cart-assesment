@@ -11,6 +11,13 @@ git clone https://github.com/Diva712/shopping-cart-assesment.git
 
 or manually copy the code from GitHub.
 
+### Install Dependencies
+Navigate to the project directory and install necessary packages:
+
+```sh
+npm install
+```
+
 ## Internal Dependencies
 
 This application fetches product prices using a **Price API**, available at:
@@ -44,14 +51,6 @@ cornflakes
 frosties
 shreddies
 weetabix
-```
-
-
-### Install Dependencies
-Navigate to the project directory and install necessary packages:
-
-```sh
-npm install
 ```
 
 ### Run the Application
