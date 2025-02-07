@@ -1,4 +1,4 @@
-const { fetchProductPrice } = require("./ProductService");
+const { fetchProductPrice } = require("../service.js/ProductService");
 
 class ShoppingCart {
 
@@ -66,6 +66,14 @@ class ShoppingCart {
       tax: this.calculateTax().toFixed(2),
       total: this.calculateTotal().toFixed(2)
     };
+  }
+
+
+  clearCart() {
+    this.items = {};
+    return {
+      message: "Cart has been cleared !!"
+    }
   }
 }
 
