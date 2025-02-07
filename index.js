@@ -6,7 +6,7 @@ const execute = async () => {
   await shoppingCart.addItem("weetabix", 1);
 
   //displaying the cart
-  cart.displayCart();
+  shoppingCart.displayCart();
 }
 //execution of execute
 execute().catch((error) => {
