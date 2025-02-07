@@ -3,6 +3,7 @@ const { fetchProductPrice } = require("../service/ProductService");
 class ShoppingCart {
 
   constructor() {
+
     this.items = {};
   }
 

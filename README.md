@@ -1,76 +1,135 @@
-## :warning: Please read these instructions carefully and entirely first
-* Clone this repository to your local machine.
-* Use your IDE of choice to complete the assignment.
-* Use Javascript or preferably Typescript to complete the assignment, other languages will not be considered unfortunately.
-* When you have completed the assignment, you need to  push your code to a public repository and send the link via email.
-* Once you reply back to the email, your assignment will be considered completed. Please make sure that you have completed the assignment and pushed all code from your local machine to the repository before you reply.
-* There is no time limit for this task - however, for guidance, it is expected to typically take around 3-4 hours.
+# Shopping Cart API
 
-# Begin the task
+## Getting Started
 
-Write some code that provides the following basic shopping cart capabilities:
+### Clone the Repository
+To run this Node.js application, first clone the repository using the following command:
 
-1. Add a product to the cart
-   1. Specifying the product name and quantity
-   2. Retrieve the product price by issuing a request to the the [Price API](#price-api) specified below
-   3. Cart state (totals, etc.) must be available
+```sh
+git clone <repo_link>
+```
 
-2. Calculate the state:
-   1. Cart subtotal (sum of price for all items)
-   2. Tax payable (charged at 12.5% on the subtotal)
-   3. Total payable (subtotal + tax)
-   4. Totals should be rounded up where required
+or manually copy the code from GitHub.
 
-## Price API
+### Install Dependencies
+Navigate to the project directory and install necessary packages:
 
-The price API is an HTTP service that returns the price details for a product, identified by it's name. The shopping cart should integrate with the price API to retrieve product prices. 
+```sh
+npm install
+```
 
-### Price API Service Details
+### Run the Application
+Start the server by running:
 
-Start the price API by running the following command: `npm run serve-products`
+```sh
+node index.js
+```
 
-Base URL: `http://localhost:3001/`
+Once the server is running, it will be available on **port 3000**.
 
-View Product: `GET /products/{product}`
+## API Endpoints
 
-List of available products
-* `cheerios`
-* `cornflakes`
-* `frosties`
-* `shreddies`
-* `weetabix`
+### Add Items to Cart
+**Endpoint:**
+```sh
+POST http://localhost:3000/api/cart/add
+```
 
-## Example
-The below is a sample with the correct values you can use to confirm your calculations
+**Request Body:**
+```json
+{
+  "items": [
+    { "productName": "cornflakes", "quantity": 1 },
+    { "productName": "cheerios", "quantity": 2 }
+  ]
+}
+```
 
-### Inputs
-* Add 1 × cornflakes @ 2.52 each
-* Add another 1 x cornflakes @2.52 each
-* Add 1 × weetabix @ 9.98 each
-  
-### Results  
-* Cart contains 2 x cornflakes
-* Cart contains 1 x weetabix
-* Subtotal = 15.02
-* Tax = 1.88
-* Total = 16.90
+**Response:**
+```json
+{
+    "message": "Items added successfully",
+    "addedItems": [
+        {
+            "message": "1 x cornflakes added to the cart"
+        },
+        {
+            "message": "2 x cheerios added to the cart"
+        }
+    ]
+}
+```
 
-## Tips on what we’re looking for
+---
 
-* We value simplicity as an architectural virtue and as a development practice. Solutions should reflect the difficulty of the assigned task, and shouldn’t be overly complex.
-* We prefer simple, well tested solutions over clever solutions.
-* We will appreciate descriptive and unambiguous names for the concepts you introduce.
-* Atomic commits with descriptive messages will get you extra brownie points.
+### Get Cart Summary
+**Endpoint:**
+```sh
+GET http://localhost:3000/api/cart/summary
+```
 
-### DO
+**Response:**
+```json
+{
+    "items": {
+        "cornflakes": {
+            "quantity": 1,
+            "price": 4.99
+        },
+        "cheerios": {
+            "quantity": 2,
+            "price": 8.43
+        }
+    },
+    "subtotal": "21.85",
+    "tax": "2.73",
+    "total": "24.58"
+}
+```
 
-* ✅ Include unit tests.
-* ✅ Test both any client and logic.
-* ✅ Update the README.md with any relevant information, assumptions, and/or tradeoffs you would like to highlight.
-* ✅ Add some information on how the reviewer might test your solution.
+---
 
-### DO NOT
+### Clear Cart
+**Endpoint:**
+```sh
+DELETE http://localhost:3000/api/cart/clear
+```
 
-* ❌ Submit any form of app, such as web APIs, browser, desktop, or command-line applications.
-* ❌ Add unnecessary layers of abstraction.
-* ❌ Add unnecessary patterns/ architectural features that aren’t called for e.g. persistent storage.
+**Response:**
+```json
+{
+    "message": "Cart has been cleared !!"
+}
+```
+
+## Internal Dependencies
+
+This application fetches product prices using a **Price API**, available at:
+
+```sh
+http://localhost:3001/products/
+```
+
+## Singleton Pattern and Its Issues
+
+Initially, the `ShoppingCart` class was implemented using the Singleton pattern. This means a single shared cart instance was used across all users. However, this approach causes inconsistency when multiple users modify the cart simultaneously.
+
+### **Why Singleton Was a Problem?**
+- **Not Suitable for Multi-User Applications** → All users share the same cart.
+- **Difficult to Test in Isolation** → Single shared state makes unit testing harder.
+- **Loss of Flexibility** → Cannot customize cart per user.
+
+### **Solution: User-Specific Carts**
+To handle multiple users correctly, we modified the implementation:
+- Removed Singleton pattern and converted `ShoppingCart` into a regular class.
+- Created a separate instance of `ShoppingCart` for each user.
+- Stored user-specific carts in-memory using a **Map** (can be replaced with a database for persistence).
+
+### **When to Use Singleton?**
+- ✅ If the app is small and controlled by a single user/admin, Singleton can be used.
+- ❌ If it's a multi-user e-commerce app, Singleton should be avoided.
+
+Instead, each user should have their own `ShoppingCart` instance, stored in a **session or database**.
+
+---
+
