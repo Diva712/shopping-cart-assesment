@@ -8,3 +8,5 @@ router.post("/add", cartController.addItemtoCart);
 router.get("/summary", cartController.getCartSummary);
 //clear the cart.
 router.delete("/clear", cartController.clearCart);
+
+module.exports = router;

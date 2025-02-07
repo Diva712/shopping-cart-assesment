@@ -1,9 +1,16 @@
+require("dotenv").config();
 const express = require("express");
+const cartRoutes = require("./cart/routes/ShoppingRoutes");
+
 
 const app = express();
 app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
+
+
+//add middle for cartRoutes
+app.use("/api/cart", cartRoutes);
 
 //Use cart route
 app.listen(PORT, () => {

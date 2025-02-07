@@ -3,6 +3,7 @@ const cart = require("../model/ShoppingCart");
 exports.addItemtoCart = async (req, res) => {
   try {
     const { productName, quantity } = req.body;
+    console.log("request body", req.body);
     if (!productName || !quantity || quantity <= 0) {
       return res.status(400).json(
         {
@@ -16,7 +17,7 @@ exports.addItemtoCart = async (req, res) => {
   } catch (error) {
 
     res.status(500).json({
-      error: error.mesaage
+      error: error.message
     })
 
   }
