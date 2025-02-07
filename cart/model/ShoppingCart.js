@@ -1,4 +1,4 @@
-const { fetchProductPrice } = require("../service.js/ProductService");
+const { fetchProductPrice } = require("../service/ProductService");
 
 class ShoppingCart {
 
