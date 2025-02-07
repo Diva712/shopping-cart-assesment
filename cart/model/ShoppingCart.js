@@ -77,4 +77,4 @@ class ShoppingCart {
   }
 }
 
-module.exports = new ShoppingCart;
+module.exports = new ShoppingCart();
