@@ -19,6 +19,34 @@ This application fetches product prices using a **Price API**, available at:
 http://localhost:3001/products/
 ```
 
+To start the main functionality you should run price API internally, run the following command:
+```sh
+npm run serve-products
+```
+
+### Base URL
+```txt
+http://localhost:3001/
+```
+
+### API Endpoints
+
+#### View Product
+```http
+GET /products/{product}
+```
+Fetch details of a specific product by replacing `{product}` with the product name.
+
+#### List of Available Products
+```txt
+cheerios
+cornflakes
+frosties
+shreddies
+weetabix
+```
+
+
 ### Install Dependencies
 Navigate to the project directory and install necessary packages:
 
