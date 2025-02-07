@@ -131,5 +131,50 @@ To handle multiple users correctly, we modified the implementation:
 
 Instead, each user should have their own `ShoppingCart` instance, stored in a **session or database**.
 
+### Running the TestCases
+
+
+### Install Dependencies
+Navigate to the project directory and install necessary packages:
+
+```sh
+npm i jest
+```
+
+## Running Tests
+
+To run the test cases, use the following command:
+
+```sh
+npm test
+```
+
+### Test Output:
+
+When you run `npm test`, you will get the following output:
+
+```
+ PASS  cart/test/ShoppingCart.test.js
+ PASS  cart/test/ShoppingCartController.test.js
+                                                                                  
+Test Suites: 2 passed, 2 total                                                    
+Tests:       11 passed, 11 total
+Snapshots:   0 total
+Time:        1.899 s
+```
+
+### Test Files:
+
+- `ShoppingCart.test.js`
+- `ShoppingCartController.test.js`
+
+These files ensure that the shopping cart functionalities and controllers work as expected.
+
 ---
+✅ **Make sure all dependencies are installed before running tests**  
+```sh
+npm install
+```
+---
+
 
